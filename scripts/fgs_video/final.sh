@@ -10,45 +10,50 @@ adb shell monkey -p com.fusena.henseiki -c android.intent.category.LAUNCHER 1; s
 
 # 1. First-run model download (data sync foreground service)
 rec_start 01-download
-tap_text "同意して始める"; sleep 4
-tap_text "モデルの準備を始める"; sleep 3
-tap_text "始める"; sleep 8
+tap_or "同意して始める" 818 1639; sleep 4
+tap_or "モデルの準備を始める" 540 1061; sleep 3
+tap_or "始める" 891 1368; sleep 8
 shade 9 download
 sleep 4; rec_stop 01-download
-wait_text "あなたの声を登録します" 900 || { log "model not ready"; }
-tap_text "声を登録する"; sleep 3
+wait_text "あなたの声を登録します" 900 || log "model not ready"
+tap_or "声を登録する" 540 996; sleep 3
 
 # 2. Microphone recording (microphone foreground service)
 rec_start 02-microphone
-tap_text "録音を始める"; sleep 3
-tap_text "使う"; sleep 6
-shot mic-screen; dumpui mic; log "recording screen: $(texts | cut -c1-300)"
+tap_or "録音を始める" 540 2017; sleep 3
+tap_or "使う" 894 1368; sleep 6
+shot mic-screen
 shade 9 microphone
-tap_text "録音を保存して終了"; sleep 5
-tap_text "閉じる"; sleep 2
+adb shell input tap 540 625; sleep 5      # in-app "録音を保存して終了"
+shot after-mic
+tap_text "閉じる" >/dev/null 2>&1; sleep 2
 rec_stop 02-microphone
 
 # 3. Voice registration from an audio file (processing foreground service)
 rec_start 03-enroll
-tap_text "音声ファイルを選ぶ"; sleep 3
-tap_text "使う"; sleep 4
-tap_text "Show roots"; sleep 2; tap_text "Downloads"; sleep 3
+tap_or "音声ファイルを選ぶ" 540 1017; sleep 3
+tap_or "使う" 894 1368; sleep 4
+tap_or "Show roots" 73 191; sleep 2; tap_or "Downloads" 441 642; sleep 3
 adb shell input tap 296 960; sleep 4
-tap_text "この音声で声を登録する"; sleep 4
+shot picked
+tap_or "この音声で声を登録する" 540 2269; sleep 4
 shade 8 enroll
-wait_text "声を登録しました" 300 && sleep 3
+sleep 40; shot enrolled
 rec_stop 03-enroll
-tap_text "閉じる"; sleep 2
+tap_or "閉じる" 890 1368; sleep 3
 
 # 4. Speech generation (processing + playback foreground service)
 rec_start 04-generate
-tap_text "この声で読み上げる"; sleep 5
+tap_or "この声で読み上げる" 540 1210; sleep 5
 shade 9 generate
 sleep 4; rec_stop 04-generate
-wait_text "できた音声を聞く" 1200 || log "generation not finished: $(texts | cut -c1-300)"
+for i in $(seq 1 40); do   # wait for the generated audio (up to ~25 min), a screenshot per minute for review
+  sleep 35; shot "gen-wait-$i"; dumpui g >/dev/null 2>&1 && grep -q "できた音声を聞く" "$OUT/cur.xml" && break
+done
+log "after generation wait: $(texts 2>/dev/null | cut -c1-300)"
 rec_start 05-playback
-tap_text "できた音声を聞く"; sleep 6
-shot player; dumpui player; log "player: $(texts | cut -c1-300)"
+tap_or "できた音声を聞く" 540 1400; sleep 6
+shot player; dumpui player; log "player: $(texts 2>/dev/null | cut -c1-300)"
 shade 9 playback
 sleep 6; rec_stop 05-playback
 log "done"

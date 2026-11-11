@@ -50,3 +50,5 @@ rec_stop() { adb shell pkill -SIGINT screenrecord; sleep 4; adb pull /sdcard/rec
 shade() { adb shell cmd statusbar expand-notifications; sleep "${1:-7}"; shot "shade-$2"; adb shell cmd statusbar collapse; sleep 2; }
 wait_text() { # wait_text <text> <seconds> : polls until the text is on screen
   local end=$((SECONDS+$2)); while [ $SECONDS -lt $end ]; do dumpui w >/dev/null && grep -q "$1" "$OUT/cur.xml" && return 0; sleep 6; done; return 1; }
+# tap_or <text> <x> <y> : tap by text when the UI tree is readable, otherwise by coordinates (busy screens block uiautomator)
+tap_or() { tap_text "$1" >/dev/null 2>&1 || { adb shell input tap "$2" "$3"; log "tapped '$1' by coordinates $2,$3"; }; }
