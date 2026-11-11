@@ -34,3 +34,14 @@ PY
   if [ -s "$OUT/xy.txt" ]; then adb shell input tap $(cat "$OUT/xy.txt"); log "tapped '$1' at $(cat "$OUT/xy.txt")"; return 0; fi
   log "NOT FOUND '$1'; visible: $(texts)"; return 1
 }
+prepare_model() { # accept terms, download the model, wait until the voice-registration screen appears
+  tap_text "同意して始める"; sleep 4
+  tap_text "モデルの準備を始める"; sleep 3
+  tap_text "始める"; sleep 4
+  adb shell cmd statusbar expand-notifications; sleep 2; shot "10-download-notification"
+  adb shell cmd statusbar collapse; sleep 1
+  for i in $(seq 1 40); do
+    sleep 15; dumpui w
+    grep -q "あなたの声を登録します" "$OUT/cur.xml" && { log "model ready after $((i*15))s"; return 0; }
+  done; log "model not ready"; return 1
+}
