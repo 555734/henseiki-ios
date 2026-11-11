@@ -23,10 +23,13 @@ tap_text() {
   python3 - "$1" "$OUT/cur.xml" > "$OUT/xy.txt" <<'PY'
 import sys,re,xml.etree.ElementTree as ET
 t=sys.argv[1]; root=ET.parse(sys.argv[2]).getroot()
-for n in root.iter('node'):
-    s=(n.get('text') or '')+' '+(n.get('content-desc') or '')
-    if t in s and n.get('bounds'):
-        m=re.findall(r'\d+',n.get('bounds')); print((int(m[0])+int(m[2]))//2,(int(m[1])+int(m[3]))//2); break
+def center(n):
+    m=re.findall(r'\d+',n.get('bounds')); return (int(m[0])+int(m[2]))//2,(int(m[1])+int(m[3]))//2
+nodes=[n for n in root.iter('node') if n.get('bounds')]
+exact=[n for n in nodes if t in ((n.get('text') or '').strip(), (n.get('content-desc') or '').strip())]
+part=[n for n in nodes if t in (n.get('text') or '')+' '+(n.get('content-desc') or '') and len(n.get('text') or '')<40]
+for n in exact+part:
+    print(*center(n)); break
 PY
   if [ -s "$OUT/xy.txt" ]; then adb shell input tap $(cat "$OUT/xy.txt"); log "tapped '$1' at $(cat "$OUT/xy.txt")"; return 0; fi
   log "NOT FOUND '$1'; visible: $(texts)"; return 1
