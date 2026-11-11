@@ -27,7 +27,7 @@ jobs:
 
   app:
     # Needs Xcode: builds the app unsigned and packages an .ipa that can be signed later (AltStore, Sideloadly, Xcode).
-    runs-on: macos-14
+    runs-on: macos-latest
     needs: core
     steps:
       - uses: actions/checkout@v4
