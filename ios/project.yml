@@ -1,0 +1,70 @@
+# XcodeGen spec: `xcodegen generate` creates VoiceClone.xcodeproj from this file (the project itself is not committed).
+name: VoiceClone
+options:
+  bundleIdPrefix: com.fusena
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEVELOPMENT_TEAM: ""            # set your Apple Developer team ID (or choose it in Xcode > Signing & Capabilities)
+    CODE_SIGN_STYLE: Automatic
+packages:
+  VoiceCloneCore:
+    path: .
+  OnnxRuntime:
+    url: https://github.com/microsoft/onnxruntime-swift-package-manager
+    from: 1.20.0
+targets:
+  VoiceClone:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+        excludes: ["Resources/PrivacyInfo.xcprivacy"]
+      - path: App/Resources/PrivacyInfo.xcprivacy
+        buildPhase: resources
+      # the same model/software attribution the Android app shows
+      - path: ../android/app/src/main/assets/model-attribution.json
+        buildPhase: resources
+        group: App/Resources
+    dependencies:
+      - package: VoiceCloneCore
+        product: VoiceCloneCore
+      - package: OnnxRuntime
+        product: onnxruntime
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.fusena.henseiki
+        PRODUCT_NAME: VoiceClone
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        TARGETED_DEVICE_FAMILY: "1,2"
+        ENABLE_BITCODE: NO
+        GENERATE_INFOPLIST_FILE: NO
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: 超すご変声機くん
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSRequiresIPhoneOS: true
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UISupportedInterfaceOrientations~ipad: [UIInterfaceOrientationPortrait, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
+        UIBackgroundModes: [audio]
+        UIUserInterfaceStyle: Light
+        ITSAppUsesNonExemptEncryption: false
+        NSMicrophoneUsageDescription: 自分の声を登録するために、マイクで録音します。録音はこの端末の中だけに保存されます。
+        # Operator contact shown in Settings; set before a store release.
+        VoiceCloneContact: a3506124@gmail.com
+        VoiceCloneModelRepository: 555734/555734.github.io
+schemes:
+  VoiceClone:
+    build:
+      targets:
+        VoiceClone: all
+    test:
+      targets: []
