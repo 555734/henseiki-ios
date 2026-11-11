@@ -20,10 +20,12 @@ tap_text "声を登録する"; sleep 3
 
 # 2. Microphone recording (microphone foreground service)
 rec_start 02-microphone
-tap_text "録音を始める"; sleep 5
-dumpui mic; log "recording screen: $(texts | cut -c1-300)"; shot mic-screen
+tap_text "録音を始める"; sleep 3
+tap_text "使う"; sleep 6
+shot mic-screen; dumpui mic; log "recording screen: $(texts | cut -c1-300)"
 shade 9 microphone
-tap_text "止め" || tap_text "停止" || tap_text "録音を終"; sleep 4
+tap_text "録音を保存して終了"; sleep 5
+tap_text "閉じる"; sleep 2
 rec_stop 02-microphone
 
 # 3. Voice registration from an audio file (processing foreground service)
