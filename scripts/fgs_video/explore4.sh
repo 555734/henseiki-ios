@@ -13,7 +13,9 @@ prepare_model
 tap_text "声を登録する"; sleep 3
 tap_text "音声ファイルを選ぶ"; sleep 3
 tap_text "使う"; sleep 4; shot 30-picker; dumpui 30; log "picker: $(texts)"
+tap_text "Show roots"; sleep 2; shot 30b-roots; dumpui 30b; log "roots: $(texts)"; tap_text "Downloads"; sleep 3; shot 30c-dl; dumpui 30c; log "downloads: $(texts)"
 tap_text "my_voice"; sleep 4; shot 31-picked; dumpui 31; log "picked: $(texts)"
+grep -q "my_voice" "$OUT/cur.xml" || { log "file not picked, abort"; exit 1; }
 tap_text "この音声で声を登録する"; sleep 4; shot 32-enroll; dumpui 32; log "enroll: $(texts)"
 adb shell cmd statusbar expand-notifications; sleep 2; shot 33-shade; adb shell cmd statusbar collapse
 for i in $(seq 1 30); do sleep 10; dumpui e; log "enroll t=$((i*10)): $(texts)"; grep -q "登録しました\|登録済み\|読み上げ" "$OUT/cur.xml" && break; done
