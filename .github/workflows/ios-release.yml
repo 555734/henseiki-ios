@@ -32,6 +32,13 @@ jobs:
             -allowProvisioningUpdates \
             -authenticationKeyPath "$RUNNER_TEMP/keys/AuthKey_${{ secrets.ASC_KEY_ID }}.p8" \
             -authenticationKeyID "${{ secrets.ASC_KEY_ID }}" -authenticationKeyIssuerID "${{ secrets.ASC_ISSUER_ID }}"
+      - name: Remove the static onnxruntime framework copy (it is already linked into the app)
+        run: |
+          APP="$RUNNER_TEMP/VoiceClone.xcarchive/Products/Applications/VoiceClone.app"
+          ls -la "$APP/Frameworks" || true
+          rm -rf "$APP/Frameworks/onnxruntime.framework"
+          rmdir "$APP/Frameworks" 2>/dev/null || true
+          otool -L "$APP/VoiceClone" | grep -i onnx || echo "no dynamic onnxruntime reference"
       - name: Export and upload to App Store Connect
         run: |
           cat > "$RUNNER_TEMP/export.plist" <<PLIST
