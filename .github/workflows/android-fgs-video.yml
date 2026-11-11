@@ -17,10 +17,11 @@ jobs:
         env: { GH_TOKEN: "${{ github.token }}" }
         run: gh release download fgs-apk -p henseiki.apk -R "$GITHUB_REPOSITORY"
       - name: Prepare a sample voice file (synthetic speech, not a real person)
+        timeout-minutes: 8
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq espeak-ng ffmpeg
-          espeak-ng -v ja -s 135 -w /tmp/sample.wav "こんにちは。これは、私の声をもとにスマートフォンの中だけで作った音声です。今日はとても良い天気で、散歩に出かけました。公園では子どもたちが楽しそうに遊んでいて、私も少し休むことにしました。"
-          ffmpeg -y -loglevel error -i /tmp/sample.wav -ar 44100 -ac 1 /tmp/sample44.wav
+          pip install --quiet gTTS
+          python3 -c "from gtts import gTTS; gTTS('こんにちは。これは、私の声をもとにスマートフォンの中だけで作った音声です。今日はとても良い天気で、散歩に出かけました。公園では子どもたちが楽しそうに遊んでいて、私も少し休むことにしました。', lang='ja').save('/tmp/sample.mp3')"
+          ffmpeg -y -loglevel error -i /tmp/sample.mp3 -ar 44100 -ac 1 /tmp/sample44.wav
           ls -la /tmp/sample44.wav
       - name: Enable KVM
         run: |
