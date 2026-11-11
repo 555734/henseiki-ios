@@ -61,10 +61,21 @@ targets:
         # Operator contact shown in Settings; set before a store release.
         VoiceCloneContact: a3506124@gmail.com
         VoiceCloneModelRepository: 555734/555734.github.io
+  VoiceCloneUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: UITests
+    dependencies:
+      - target: VoiceClone
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.fusena.henseiki.uitests
+        GENERATE_INFOPLIST_FILE: YES
 schemes:
   VoiceClone:
     build:
       targets:
         VoiceClone: all
     test:
-      targets: []
+      targets: [VoiceCloneUITests]

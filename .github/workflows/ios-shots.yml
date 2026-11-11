@@ -1,0 +1,40 @@
+name: iOS screenshots
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  shots:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate the Xcode project
+        run: |
+          brew install xcodegen
+          cd ios && xcodegen generate
+      - name: Pick a 6.9-inch simulator
+        id: sim
+        run: |
+          xcrun simctl list devices available | grep -E "iPhone 1[67] Pro Max" | head -3
+          udid=$(xcrun simctl list devices available | grep -E "iPhone 16 Pro Max" | head -1 | sed -E 's/.*\(([0-9A-F-]{36})\).*/\1/')
+          echo "udid=$udid" >> "$GITHUB_OUTPUT"
+          xcrun simctl boot "$udid" || true
+          xcrun simctl bootstatus "$udid" -b
+      - name: Run the screenshot test
+        env:
+          SCREENSHOT_DIR: ${{ runner.temp }}/shots
+        run: |
+          mkdir -p "$SCREENSHOT_DIR"
+          cd ios
+          SIMCTL_CHILD_SCREENSHOT_DIR="$SCREENSHOT_DIR" xcodebuild test -project VoiceClone.xcodeproj -scheme VoiceClone \
+            -destination "id=${{ steps.sim.outputs.udid }}" -only-testing:VoiceCloneUITests CODE_SIGNING_ALLOWED=NO | tail -40
+          ls -l "$SCREENSHOT_DIR"
+      - name: Publish the screenshots
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="ios-shots-${GITHUB_RUN_NUMBER}-${GITHUB_RUN_ATTEMPT}"
+          gh release create "$tag" "${{ runner.temp }}"/shots/*.png --prerelease --title "iOS screenshots ${GITHUB_RUN_NUMBER}" --notes "Simulator screenshots"

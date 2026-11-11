@@ -26,8 +26,8 @@ struct RootView: View {
 
 struct Wordmark: View {
     var body: some View {
-        (Text("Voice").foregroundColor(Palette.ink) + Text("Clone").foregroundColor(Palette.primary))
-            .font(.system(size: 22, weight: .bold))
+        (Text("超すご変声").foregroundColor(Palette.ink) + Text("機くん").foregroundColor(Palette.primary))
+            .font(.system(size: 20, weight: .bold))
     }
 }
 
