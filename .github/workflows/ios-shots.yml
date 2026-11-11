@@ -31,10 +31,10 @@ jobs:
           cd ios
           SIMCTL_CHILD_SCREENSHOT_DIR="$SCREENSHOT_DIR" xcodebuild test -project VoiceClone.xcodeproj -scheme VoiceClone \
             -destination "id=${{ steps.sim.outputs.udid }}" -only-testing:VoiceCloneUITests CODE_SIGNING_ALLOWED=NO | tail -40
-          ls -l "$SCREENSHOT_DIR"
+          ls -l /tmp/shots "$SCREENSHOT_DIR" || true
       - name: Publish the screenshots
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           tag="ios-shots-${GITHUB_RUN_NUMBER}-${GITHUB_RUN_ATTEMPT}"
-          gh release create "$tag" "${{ runner.temp }}"/shots/*.png --prerelease --title "iOS screenshots ${GITHUB_RUN_NUMBER}" --notes "Simulator screenshots"
+          gh release create "$tag" /tmp/shots/*.png --prerelease --title "iOS screenshots ${GITHUB_RUN_NUMBER}" --notes "Simulator screenshots"
