@@ -41,7 +41,7 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.fusena.henseiki
         PRODUCT_NAME: VoiceClone
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
-        TARGETED_DEVICE_FAMILY: "1,2"
+        TARGETED_DEVICE_FAMILY: "1"
         ENABLE_BITCODE: NO
         GENERATE_INFOPLIST_FILE: NO
     info:
