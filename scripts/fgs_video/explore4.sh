@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 source scripts/fgs_video/lib.sh
-for i in 1 2 3; do adb push /tmp/sample44.wav /sdcard/Download/my_voice.wav && break; sleep 5; done; log "downloads dir: $(adb shell ls -la /sdcard/Download | tr "
+for i in 1 2 3; do adb push /tmp/sample.mp3 /sdcard/Download/my_voice.mp3 && break; sleep 5; done; log "downloads dir: $(adb shell ls -la /sdcard/Download | tr "
 " ";")"
-adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/Download/my_voice.wav >/dev/null
+adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/Download/my_voice.mp3 >/dev/null
 adb install -r henseiki.apk >/dev/null
 adb shell pm grant com.fusena.henseiki android.permission.RECORD_AUDIO
 adb shell pm grant com.fusena.henseiki android.permission.POST_NOTIFICATIONS

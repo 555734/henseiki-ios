@@ -21,8 +21,7 @@ jobs:
         run: |
           pip install --quiet gTTS
           python3 -c "from gtts import gTTS; gTTS('こんにちは。これは、私の声をもとにスマートフォンの中だけで作った音声です。今日はとても良い天気で、散歩に出かけました。公園では子どもたちが楽しそうに遊んでいて、私も少し休むことにしました。', lang='ja').save('/tmp/sample.mp3')"
-          ffmpeg -y -loglevel error -i /tmp/sample.mp3 -ar 44100 -ac 1 /tmp/sample44.wav
-          ls -la /tmp/sample44.wav
+          ls -la /tmp/sample.mp3
       - name: Enable KVM
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
