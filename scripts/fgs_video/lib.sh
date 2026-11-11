@@ -45,3 +45,8 @@ prepare_model() { # accept terms, download the model, wait until the voice-regis
     grep -q "あなたの声を登録します" "$OUT/cur.xml" && { log "model ready after $((i*15))s"; return 0; }
   done; log "model not ready"; return 1
 }
+rec_start() { adb shell rm -f /sdcard/rec_$1.mp4; (adb shell screenrecord --time-limit 170 --bit-rate 4000000 /sdcard/rec_$1.mp4 >/dev/null 2>&1 &) ; sleep 2; log "recording $1"; }
+rec_stop() { adb shell pkill -SIGINT screenrecord; sleep 4; adb pull /sdcard/rec_$1.mp4 "$OUT/$1.mp4" >/dev/null 2>&1; log "saved $1 ($(stat -c %s "$OUT/$1.mp4" 2>/dev/null) bytes)"; }
+shade() { adb shell cmd statusbar expand-notifications; sleep "${1:-7}"; shot "shade-$2"; adb shell cmd statusbar collapse; sleep 2; }
+wait_text() { # wait_text <text> <seconds> : polls until the text is on screen
+  local end=$((SECONDS+$2)); while [ $SECONDS -lt $end ]; do dumpui w >/dev/null && grep -q "$1" "$OUT/cur.xml" && return 0; sleep 6; done; return 1; }
