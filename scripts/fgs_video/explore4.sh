@@ -18,7 +18,8 @@ adb shell input tap 296 960; sleep 4; shot 31-picked; dumpui 31; log "picked: $(
 grep -q "Files in Downloads" "$OUT/cur.xml" && { log "file not picked, abort"; exit 1; }; true
 tap_text "この音声で声を登録する"; sleep 4; shot 32-enroll; dumpui 32; log "enroll: $(texts)"
 adb shell cmd statusbar expand-notifications; sleep 2; shot 33-shade; adb shell cmd statusbar collapse
-for i in $(seq 1 30); do sleep 10; dumpui e; log "enroll t=$((i*10)): $(texts)"; grep -q "登録しました\|登録済み\|読み上げ" "$OUT/cur.xml" && break; done
+for i in $(seq 1 60); do sleep 20; dumpui e; log "enroll t=$((i*20)): $(texts | cut -c1-200)"; shot "34-enroll-$i"; adb shell dumpsys meminfo com.fusena.henseiki | grep "TOTAL PSS" >> "$OUT/mem.txt"; grep -q "登録しました\|登録済み\|声を登録し\|処理を停止" "$OUT/cur.xml" || break; done
+adb logcat -d | grep -i "voiceclone\|henseiki\|onnx\|AndroidRuntime\|lowmemory\|lmkd" | tail -150 > "$OUT/app_logcat.txt"
 shot 34-enrolled
 tap_text "読"; sleep 3; shot 35-read; dumpui 35; log "read: $(texts)"
 tap_text "この声で読み上げる"; sleep 5; shot 36-gen; dumpui 36; log "gen: $(texts)"
