@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 source scripts/fgs_video/lib.sh
-sudo apt-get install -y espeak-ng ffmpeg >/dev/null 2>&1
-espeak-ng -v ja -s 135 -w /tmp/sample.wav "こんにちは。これは、私の声をもとにスマートフォンの中だけで作った音声です。今日はとても良い天気で、散歩に出かけました。公園では子どもたちが楽しそうに遊んでいて、私も少し休むことにしました。"
-ffmpeg -y -loglevel error -i /tmp/sample.wav -ar 44100 -ac 1 /tmp/sample44.wav
-adb push /tmp/sample44.wav /sdcard/Download/my_voice.wav >/dev/null
+for i in 1 2 3; do adb push /tmp/sample44.wav /sdcard/Download/my_voice.wav && break; sleep 5; done; log "downloads dir: $(adb shell ls -la /sdcard/Download | tr "
+" ";")"
 adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/Download/my_voice.wav >/dev/null
 adb install -r henseiki.apk >/dev/null
 adb shell pm grant com.fusena.henseiki android.permission.RECORD_AUDIO
