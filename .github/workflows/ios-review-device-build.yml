@@ -1,0 +1,93 @@
+name: Build iOS 1.0 (4) for real-device review
+on:
+  push:
+    branches: [codex/ios-review-attachment]
+    paths: [".github/workflows/ios-review-device-build.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  device-build:
+    runs-on: macos-latest
+    timeout-minutes: 35
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+    steps:
+      - name: Fetch the submitted app source
+        uses: actions/checkout@v4
+        with:
+          ref: 29839e9ba9493e4c0019ccbc055414ab02dd4e88
+          path: submitted-source
+      - name: Verify toolchain and source, and pin the submitted ONNX dependency
+        run: |
+          test -d "$DEVELOPER_DIR"
+          xcodebuild -version
+          test "$(git -C submitted-source rev-parse HEAD)" = "29839e9ba9493e4c0019ccbc055414ab02dd4e88"
+          python3 - <<'PY'
+          from pathlib import Path
+          spec = Path("submitted-source/ios/project.yml")
+          text = spec.read_text()
+          assert "from: 1.20.0" in text
+          spec.write_text(text.replace("from: 1.20.0", "exactVersion: 1.24.2"))
+          PY
+      - name: Check the unchanged Swift core
+        run: swift test --package-path submitted-source/ios
+      - name: Generate the project and build unsigned for a real iPhone
+        run: |
+          brew install xcodegen
+          cd submitted-source/ios
+          xcodegen generate
+          xcodebuild -project VoiceClone.xcodeproj -scheme VoiceClone -configuration Release \
+            -destination 'generic/platform=iOS' -derivedDataPath build \
+            MARKETING_VERSION=1.0 CURRENT_PROJECT_VERSION=4 \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" build > "$RUNNER_TEMP/device-build.log" 2>&1 \
+            || { tail -80 "$RUNNER_TEMP/device-build.log"; exit 1; }
+          tail -10 "$RUNNER_TEMP/device-build.log"
+      - name: Package and verify the version and dependency
+        run: |
+          mkdir -p output/Payload
+          cp -R submitted-source/ios/build/Build/Products/Release-iphoneos/VoiceClone.app output/Payload/
+          python3 - <<'PY'
+          import json, plistlib, subprocess
+          from pathlib import Path
+          root = Path("output/Payload/VoiceClone.app")
+          info = plistlib.loads((root / "Info.plist").read_bytes())
+          assert info["CFBundleIdentifier"] == "com.fusena.henseiki"
+          assert info["CFBundleShortVersionString"] == "1.0"
+          assert info["CFBundleVersion"] == "4"
+          lock = Path("submitted-source/ios/VoiceClone.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved")
+          resolved = json.loads(lock.read_text())
+          onnx = next(p for p in resolved["pins"] if "onnxruntime" in p["identity"].lower())
+          assert onnx["state"]["version"] == "1.24.2"
+          metadata = {
+              "source_commit": "29839e9ba9493e4c0019ccbc055414ab02dd4e88",
+              "bundle_id": info["CFBundleIdentifier"], "version": "1.0", "build": "4",
+              "onnxruntime": onnx["state"], "xcode": subprocess.check_output(["xcodebuild", "-version"], text=True),
+              "signing": "unsigned; the device provider must re-sign",
+              "original_app_store_archive": False, "physical_device_qa": "not yet performed",
+              "purpose": "Source-matched real-device QA build; no app source behavior changes."
+          }
+          Path("output/build-metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")
+          print(json.dumps(metadata, indent=2))
+          PY
+          cd output
+          zip -qry VoiceClone-1.0-4-review-unsigned.ipa Payload
+          shasum -a 256 VoiceClone-1.0-4-review-unsigned.ipa > VoiceClone-1.0-4-review-unsigned.ipa.sha256
+      - name: Publish the unsigned QA build separately from production
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="ios-review-1.0-4-source-29839e9-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          gh release create "$tag" output/VoiceClone-1.0-4-review-unsigned.ipa \
+            output/VoiceClone-1.0-4-review-unsigned.ipa.sha256 output/build-metadata.json \
+            --repo "$GITHUB_REPOSITORY" --target 29839e9ba9493e4c0019ccbc055414ab02dd4e88 --prerelease \
+            --title "iOS 1.0 (4): unsigned source-matched QA build" \
+            --notes "Built from submitted app source 29839e9 with ONNX Runtime 1.24.2 and Xcode 26.6. This is a new unsigned QA package, not the original App Store archive. The cloud-device provider must re-sign it. Physical-device testing has not yet been performed. No App Store upload or submission is made by this workflow."
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ios-1.0-4-review-build
+          path: |
+            output/*.ipa
+            output/*.sha256
+            output/build-metadata.json
+          retention-days: 14
