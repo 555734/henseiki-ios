@@ -1,4 +1,4 @@
-name: Attach iOS review licenses
+name: Save iOS review license reference
 on:
   push:
     branches: [codex/ios-review-attachment]
@@ -24,12 +24,12 @@ jobs:
       - run: python -m pip install "PyJWT[crypto]==2.10.1"
       - name: Check attachment safeguards
         run: python scripts/test_app_store_review.py
-      - name: Attach licenses to iOS 1.0 (4) and verify processing
+      - name: Link licenses in iOS 1.0 (4) Notes and verify readback
         env:
           ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
           ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
-        run: python scripts/app_store_review.py --upload-licenses
+        run: python scripts/app_store_review.py --link-licenses
       - uses: actions/upload-artifact@v4
         if: always()
         with:

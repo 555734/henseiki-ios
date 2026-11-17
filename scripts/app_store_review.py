@@ -13,6 +13,8 @@ import urllib.request
 API = "https://api.appstoreconnect.apple.com"
 APP_ID, BUNDLE_ID, VERSION, BUILD = "6833313915", "com.fusena.henseiki", "1.0", "4"
 NAME = "third-party-licenses.txt"
+LICENSE_URL = "https://github.com/555734/henseiki-ios/blob/88b85a28e566a70cd31daac80b3915c06680b91f/docs/store/third-party-licenses.txt"
+EXPECTED_DRAFT_SHA256 = "50292b5ddb38e38eefb305080fb9cbb0b8db7c74eeb816a02a6c340c28c88f8b"
 
 class ReviewError(Exception):
     pass
@@ -165,9 +167,28 @@ def attach(client, review_id, content):
     return {"file_name": NAME, "state": item["attributes"]["assetDeliveryState"]["state"],
             "reused": False, "sha256": hashlib.sha256(content).hexdigest()}
 
+def link_licenses(client, review_id):
+    path = f"/v1/appStoreReviewDetails/{review_id}"
+    notes = client.api("GET", path)["data"]["attributes"].get("notes") or ""
+    if LICENSE_URL in notes:
+        return {"url": LICENSE_URL, "readback_matches": True, "reused": True}
+    canonical = notes.replace("\r\n", "\n").strip()
+    if hashlib.sha256(canonical.encode()).hexdigest() != EXPECTED_DRAFT_SHA256:
+        raise ReviewError("Review notes changed since the prepared draft; preserving those edits.")
+    updated = notes.replace(NAME, LICENSE_URL, 1)
+    if updated == notes or len(updated.encode("utf-16-le")) // 2 > 4000:
+        raise ReviewError("License reference is missing or updated Notes exceed 4000 characters.")
+    client.api("PATCH", path, {"data": {"type": "appStoreReviewDetails", "id": review_id,
+                "attributes": {"notes": updated}}})
+    saved = client.api("GET", path)["data"]["attributes"].get("notes")
+    if saved != updated:
+        raise ReviewError("Review Notes readback differs after saving.")
+    return {"url": LICENSE_URL, "readback_matches": True, "reused": False}
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--upload-licenses", action="store_true")
+    parser.add_argument("--link-licenses", action="store_true")
     parser.add_argument("--output", type=Path, default=Path("review-status.json"))
     args = parser.parse_args()
     content = Path(__file__).resolve().parents[1].joinpath("docs/store", NAME).read_bytes()
@@ -181,6 +202,10 @@ def main():
         summary.update(current)
     else:
         summary["license_attachment"] = "not modified"
+    if args.link_licenses:
+        summary["license_document"] = link_licenses(client, review_id)
+        _, current = target(client)
+        summary.update(current)
     args.output.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(summary, indent=2))
 
