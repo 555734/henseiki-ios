@@ -1,0 +1,538 @@
+Third-party licenses and model attribution - iOS 1.0 (4)
+
+Source: 555734/henseiki-ios commit 29839e9ba9493e4c0019ccbc055414ab02dd4e88
+
+Extracted without changing the shipped model license/notice text. The RF model is not used by this iOS build.
+
+Converted model source: raratu/Onsei-iOS-Models @ 158b33fdb7fe95753922586c76bc8640feafd897
+
+MIT.txt
+Source: https://huggingface.co/raratu/Onsei-iOS-Models/raw/158b33fdb7fe95753922586c76bc8640feafd897/LICENSES/MIT.txt
+SHA-256: dfd47cc99fd79cced8e0cab04ed81f70b3d4f2f475a75746b341671bd3991c00
+
+MIT License
+
+Copyright (c) 2026 Aratako
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+Apache-2.0.txt
+Source: https://huggingface.co/raratu/Onsei-iOS-Models/raw/158b33fdb7fe95753922586c76bc8640feafd897/LICENSES/Apache-2.0.txt
+SHA-256: 8c6db340475136df3c1201d458fa5755698eace76e510471ecc9d857d6083dac
+
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      "Object" form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      "Derivative Works" shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      "Contribution" shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, "submitted"
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as "Not a Contribution."
+
+      "Contributor" shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
+
+      (d) If the Work includes a "NOTICE" text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+
+   APPENDIX: How to apply the Apache License to your work.
+
+      To apply the Apache License to your work, attach the following
+      boilerplate notice, with the fields enclosed by brackets "[]"
+      replaced with your own identifying information. (Don't include
+      the brackets!)  The text should be enclosed in the appropriate
+      comment syntax for the file format. We also recommend that a
+      file or class name and description of purpose be included on the
+      same "printed page" as the copyright notice for easier
+      identification within third-party archives.
+
+   Copyright [yyyy] [name of copyright owner]
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+
+
+Descript-MIT.txt
+Source: https://huggingface.co/raratu/Onsei-iOS-Models/raw/158b33fdb7fe95753922586c76bc8640feafd897/LICENSES/Descript-MIT.txt
+SHA-256: 5d7a5f644313f30aad5ef032669ada67efdacefecb2c7d7b875683698bd70e87
+
+MIT License
+
+Copyright (c) 2023-present, Descript
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+ModernBERT-MIT.txt
+Source: https://huggingface.co/raratu/Onsei-iOS-Models/raw/158b33fdb7fe95753922586c76bc8640feafd897/LICENSES/ModernBERT-MIT.txt
+SHA-256: 284353c80e0d52c06e97af62fd40e4dd1d253fa28f5d1e756121ea1d5d441509
+
+MIT License
+
+Copyright (c) 2025 SB Intuitions
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+Third-party notices
+Source: https://huggingface.co/raratu/Onsei-iOS-Models/raw/158b33fdb7fe95753922586c76bc8640feafd897/THIRD_PARTY_NOTICES.md
+SHA-256: c671773f21c400c2fdfa6ac14eef6f38eb72401fc309a66d539581b0d5f20b0b
+
+# Third-party notices
+
+## Irodori-TTS
+
+- v4.1 source: https://huggingface.co/Aratako/Irodori-TTS-v4.1-Small (revision `2b28324dc263ed5e6638b3cf3dd94c82ead07b4b`)
+- v4 implementation: https://github.com/Aratako/Irodori-TTS (revision `8224dafb46d0aba89209a8f905f1cb7e3299d9c1`); shared backbone export and tensor-based attention mask handling for dynamic ONNX inputs.
+- Copyright: Chihiro Arata and contributors
+- Sources: https://huggingface.co/Aratako/Irodori-TTS-500M-v3 and https://huggingface.co/Aratako/Irodori-TTS-600M-v3-VoiceDesign
+- License: MIT (`LICENSES/MIT.txt`)
+- Changes: converted from PyTorch checkpoints to ONNX; split static conditioning projection into `context_kv.onnx`; fixed export dimensions for the iOS runtime.
+
+The responsible-use restrictions and disclaimers from the upstream model cards are reproduced in this repository's README.
+
+## Semantic-DACVAE-Japanese-32dim
+
+- Copyright: Chihiro Arata and contributors
+- Source: https://huggingface.co/Aratako/Semantic-DACVAE-Japanese-32dim
+- License: MIT (`LICENSES/MIT.txt`)
+- Changes: converted encoder and decoder to ONNX for the iOS runtime.
+
+## llm-jp-3-150m tokenizer
+
+- Copyright: LLM-jp / National Institute of Informatics contributors
+- Source: https://huggingface.co/llm-jp/llm-jp-3-150m
+- License: Apache License 2.0 (`LICENSES/Apache-2.0.txt`)
+- Files redistributed: tokenizer JSON and tokenizer configuration metadata.
+
+## ONNX export code
+
+- Source: https://github.com/Aratako/Irodori-TTS
+- License: MIT (`LICENSES/MIT.txt`)
+
+## ModernBERT-ja-310m (v4.1 encoder and tokenizer)
+
+- Source: https://huggingface.co/sbintuitions/modernbert-ja-310m
+- Copyright: SB Intuitions and contributors
+- License: MIT
+- The fine-tuned encoder and exact tokenizer are redistributed as part of the Irodori-TTS-v4.1-Small conversion. Text and caption share one encoder graph.
+
+## DACVAE / Descript Audio Codec ancestry (ONNX and Core ML)
+
+- Semantic-DACVAE-Japanese-32dim source revision: `47376ee24834d7a05a48ebabfe3cde29b3c5e214` (MIT as declared by its model card).
+- Base weights: https://huggingface.co/facebook/dacvae-watermarked (model metadata: Apache-2.0).
+- DACVAE implementation: https://github.com/facebookresearch/dacvae (Apache License 2.0; `LICENSES/Apache-2.0.txt`). Copyright (c) Meta Platforms, Inc. and affiliates. All Rights Reserved.
+- DAC architecture: https://github.com/descriptinc/descript-audio-codec (MIT; `LICENSES/Descript-MIT.txt`). Copyright (c) 2023-present, Descript.
+- The base model README also contains a conflicting “SAM License” sentence; the linked DACVAE implementation LICENSE is Apache-2.0. This distribution preserves the Apache-2.0 license and does not relicense upstream components as MIT.
+- Changes by the Onsei conversion: exported the decoder to a float32 Core ML ML Program using coremltools 9.0, folded weight normalization, froze constant expressions, and bounded batch/time input dimensions. No quantization or retraining. Watermarking remains bypassed as instructed by the Japanese model card. The converted model is not a watermarked-audio guarantee.
+- `native_decoder/manifest.json` records the source ONNX digest, converted file digests and numerical verification. Core ML conversion does not grant any additional rights to upstream weights.
+
+
+MF model card and ethical restrictions
+Source: https://huggingface.co/Aratako/Irodori-TTS-v4.1-Small-MF/raw/ccc78f5d480b6e51b69b2d5042a14c4da04fea6e/README.md
+SHA-256: a0ce54c3fb6b19a3af8f41d38e127162c04ae4217d036c16774bb749dd2a20bb
+
+---
+license: mit
+language:
+- ja
+pipeline_tag: text-to-speech
+tags:
+- speech
+- voice
+- tts
+- meanflow
+base_model:
+- Aratako/Irodori-TTS-v4.1-Small
+---
+
+# Irodori-TTS-v4.1-Small-MF
+
+[![Code](https://img.shields.io/badge/Code-GitHub-black)](https://github.com/Aratako/Irodori-TTS)
+
+**Irodori-TTS-v4.1-Small-MF** is a Japanese Text-to-Speech model distilled from [Irodori-TTS-v4.1-Small](https://huggingface.co/Aratako/Irodori-TTS-v4.1-Small) using MeanFlow for generation with fewer sampling steps. It supports zero-shot voice cloning, text-based Voice Design, style-controlled voice cloning, long-reference conditioning, and emoji-based style control.
+
+At four sampling steps, MeanFlow substantially improves Japanese reading accuracy and speaker similarity over the RF model at the same step count, bringing these metrics closer to the 40-step RF results.
+
+## ✨ MeanFlow Distillation
+
+The original Rectified Flow (RF) model generates audio by repeatedly predicting the instantaneous velocity along a path from noise to audio latents. MeanFlow learns the average velocity over a sampling interval, allowing larger updates with fewer model evaluations.
+
+This model was distilled from a frozen v4.1-Small RF teacher. An interval-length embedding was added to the student DiT, and the entire student DiT was trained to predict the teacher's average velocity. The condition encoders and duration predictor were kept frozen.
+
+Classifier-free guidance (CFG) is incorporated into the teacher targets during distillation. MeanFlow inference therefore uses one conditional DiT evaluation per sampling step, without separate CFG evaluations.
+
+## 🚀 Usage
+
+For inference code, installation instructions, and training scripts, please refer to the GitHub repository:
+
+👉 **[GitHub: Aratako/Irodori-TTS](https://github.com/Aratako/Irodori-TTS)**
+
+```bash
+uv run --no-sync python infer.py \
+  --hf-checkpoint Aratako/Irodori-TTS-v4.1-Small-MF \
+  --text "こんにちは、私はAIです。これは音声合成のテストです。" \
+  --ref-wav path/to/reference.wav \
+  --output-wav outputs/sample_meanflow.wav
+```
+
+The default is four sampling steps. Use `--num-steps` to change the step count. The CLI and Gradio UIs detect MeanFlow checkpoints automatically. In Gradio, enter `Aratako/Irodori-TTS-v4.1-Small-MF` in the checkpoint field and leave **Num Steps** blank to use the default.
+
+Text, captions, reference audio, and duration controls use the same interface as v4.1-Small. Inference-time CFG settings and Sway Sampling do not apply to MeanFlow. See the [MeanFlow guide](https://github.com/Aratako/Irodori-TTS/blob/main/docs/meanflow.md) for inference and distillation details.
+
+## 📊 Benchmarks
+
+The following evaluations compare MeanFlow at four steps with RF at four and 40 steps. All runs use FP32 inference and five sampling seeds, 0 through 4. Values with ± report the mean and population standard deviation across seeds; top-1 accuracy is reported as the five-seed mean.
+
+### Japanese Reading
+
+Reading was evaluated without reference audio or captions. The RF runs use linear Euler sampling and text CFG 3.0; MeanFlow uses guidance learned during distillation.
+
+#### Joyo Kanji Yomi Benchmark: Parakeet Edition
+
+This evaluation uses [JKYB-Parakeet](https://github.com/Parakeet-Inc/Joyo-Kanji-Yomi-Benchmark-Parakeet-Edition), rather than the original Joyo Kanji Yomi Benchmark used in the earlier model cards.
+
+| Model | Steps | Accuracy ↑ | Relaxed accuracy ↑ | Target Kana-CER ↓ | Target Kana-CER@1 ↓ | Sentence Kana-CER ↓ | Text CER ↓ |
+| :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Irodori-TTS-v4.1-Small | RF 40 | **93.42 ± 0.04%** | **93.51 ± 0.04%** | **6.88 ± 0.08%** | **5.19 ± 0.05%** | **1.25 ± 0.01%** | **4.68 ± 0.06%** |
+| Irodori-TTS-v4.1-Small | RF 4 | 89.65 ± 0.15% | 89.73 ± 0.14% | 11.10 ± 0.38% | 7.93 ± 0.09% | 2.65 ± 0.04% | 6.35 ± 0.13% |
+| **Irodori-TTS-v4.1-Small-MF** | **MF 4** | 92.76 ± 0.09% | 92.84 ± 0.09% | 7.67 ± 0.13% | 5.68 ± 0.05% | 1.44 ± 0.01% | 4.96 ± 0.04% |
+
+#### JSUT BASIC5000
+
+| Model | Steps | Sentence Kana-CER ↓ | Standard CER ↓ |
+| :--- | ---: | ---: | ---: |
+| Irodori-TTS-v4.1-Small | RF 40 | **3.43 ± 0.01%** | **7.22 ± 0.12%** |
+| Irodori-TTS-v4.1-Small | RF 4 | 6.50 ± 0.34% | 11.13 ± 0.63% |
+| **Irodori-TTS-v4.1-Small-MF** | **MF 4** | 3.78 ± 0.03% | 7.74 ± 0.16% |
+
+MeanFlow improves every reported reading metric over four-step RF. For example, JKYB-Parakeet target Kana-CER decreases from 11.10% to 7.67%, and JSUT sentence Kana-CER decreases from 6.50% to 3.78%. The 40-step RF model remains better on these reading metrics.
+
+### Voice Cloning and Reference Length
+
+Voice cloning was evaluated on JVS using all 100 speakers, five target texts, and five synthesis seeds. Independently encoded reference utterances were concatenated into one-clip, approximately 30-second, approximately 60-second, and 120-second conditions. CAM++ similarity was measured against a fixed centroid of ten held-out natural utterances per speaker. Top-1 accuracy measures whether the generated voice is matched to the correct speaker among the 100 JVS speakers.
+
+The RF runs use text CFG 3.0 and speaker CFG 5.0. The RF 40-step baseline is the published **v4-Small** result; the RF four-step and MeanFlow results use **v4.1-Small** and **v4.1-Small-MF**, respectively.
+
+#### JVS CAM++ Cosine Similarity ↑
+
+| Reference | v4-Small, RF 40 | v4.1-Small, RF 4 | v4.1-Small-MF, MF 4 |
+| :--- | ---: | ---: | ---: |
+| One clip | **0.6610 ± 0.0013** | 0.3593 ± 0.0009 | 0.6604 ± 0.0013 |
+| ~30 seconds | **0.7521 ± 0.0008** | 0.3835 ± 0.0043 | 0.7429 ± 0.0006 |
+| ~60 seconds | **0.7646 ± 0.0003** | 0.3694 ± 0.0013 | 0.7532 ± 0.0011 |
+| 120 seconds | **0.7753 ± 0.0009** | 0.3398 ± 0.0030 | 0.7647 ± 0.0012 |
+
+#### JVS CAM++ Top-1 Accuracy ↑
+
+| Reference | v4-Small, RF 40 | v4.1-Small, RF 4 | v4.1-Small-MF, MF 4 |
+| :--- | ---: | ---: | ---: |
+| One clip | 84.60% | 24.56% | **84.64%** |
+| ~30 seconds | **98.56%** | 37.92% | 97.52% |
+| ~60 seconds | **99.56%** | 35.04% | 98.36% |
+| 120 seconds | **99.76%** | 30.28% | 98.96% |
+
+Reducing RF sampling to four steps sharply reduces speaker similarity in this evaluation. MeanFlow retains much more of the 40-step baseline's cloning performance: with approximately 30 seconds of reference audio, CAM++ cosine similarity is 0.7429 versus 0.3835 for four-step RF and 0.7521 for 40-step RF.
+
+## ⚠️ Limitations
+
+  - **Japanese Only:** This model currently supports Japanese text input only.
+  - **Few-step Quality:** Four-step MeanFlow improves over four-step RF in the reported benchmarks, but does not fully match 40-step RF reading accuracy or long-reference speaker similarity.
+  - **Fixed Guidance:** CFG is learned during distillation and cannot be adjusted through inference-time CFG scales.
+  - **Long-reference Composition:** Training and long-reference evaluation used multiple short utterances from the same speaker concatenated together. A single uninterrupted long recording is supported as input, but its effect has not been evaluated.
+  - **Conditioning Conflicts:** When using both reference audio and a text caption, contradictory instructions may result in unstable audio quality, unnatural artifacts, or one condition overriding the other. For optimal results, use the caption to guide emotion, style, or environment while keeping the base voice characteristics aligned with the reference audio.
+  - **Prompt Adherence:** Highly complex or contradictory captions may produce inconsistent results.
+  - **Emoji Control:** The effect of emoji-based control may vary depending on context and is not always perfectly consistent.
+  - **Kanji Reading:** Uncommon names, specialized terminology, and context-dependent readings may still be pronounced incorrectly.
+  - **Evaluation Scope:** The reported benchmarks measure reading and speaker similarity, not Voice Design or emoji-control quality. Automatic benchmark scores do not fully represent human perception.
+
+## 📜 License & Ethical Restrictions
+
+### License
+
+This model is released under **[MIT](https://choosealicense.com/licenses/mit/)**.
+
+### Ethical Restrictions
+
+In addition to the license terms, the following ethical restrictions apply:
+
+1.  **No Impersonation:** Do not use this model to clone or impersonate the voice of any individual (e.g., voice actors, celebrities, public figures) without their explicit consent.
+2.  **No Misinformation:** Do not use this model to generate deepfakes or synthetic speech intended to mislead others or spread misinformation.
+3.  **Voice Generation Disclaimer:** When generating speech purely from text or captions without using reference audio, it is possible that the generated voice may coincidentally resemble that of a real person. This is strictly a probabilistic artifact within the latent space. The model was not trained with the intent of reproducing specific individuals.
+4.  **Liability Disclaimer:** The developers assume no liability for any misuse of this model. Users are solely responsible for ensuring their use of the generated content complies with applicable laws and regulations in their jurisdiction.
+
+## 🙏 Acknowledgments
+
+This project builds upon the following works:
+
+  - [dots.tts](https://github.com/studio-dots-ai/dots.tts) — MeanFlow implementation reference
+  - [Echo-TTS](https://jordandarefsky.com/blog/2025/echo/) — Architecture and training design reference
+  - [DACVAE](https://github.com/facebookresearch/dacvae) — Audio VAE
+  - [sbintuitions/modernbert-ja-310m](https://huggingface.co/sbintuitions/modernbert-ja-310m) — Pretrained Japanese text and caption encoder
+  - [SilentCipher](https://github.com/sony/silentcipher) — Audio watermarking integration
+
+We would also like to extend our special thanks to **[Respair](https://huggingface.co/Respair)** for the inspiration behind the emoji annotation feature, and to [gabrielclark3330](https://huggingface.co/gabrielclark3330) and [kikouousya](https://huggingface.co/kikouousya) for supporting this project.
+
+## 🖊️ Citation
+
+If you use Irodori-TTS in your research or project, please cite it as follows:
+
+```bibtex
+@misc{irodori-tts-v4.1-small-mf,
+  author = {Chihiro Arata},
+  title = {Irodori-TTS: A Flow Matching-based Text-to-Speech Model with Emoji-driven Style Control},
+  year = {2026},
+  publisher = {Hugging Face},
+  journal = {Hugging Face repository},
+  howpublished = {\url{https://huggingface.co/Aratako/Irodori-TTS-v4.1-Small-MF}}
+}
+```
+
+
+Microsoft ONNX Runtime
+Source: https://github.com/microsoft/onnxruntime/blob/main/LICENSE
+Retrieved: 2026-11-15
+
+MIT License
+
+Copyright (c) Microsoft Corporation
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

@@ -1,0 +1,39 @@
+name: Attach iOS review licenses
+on:
+  push:
+    branches: [codex/ios-review-attachment]
+    paths:
+      - ".github/workflows/ios-review-attachment.yml"
+      - "scripts/app_store_review.py"
+      - "docs/store/third-party-licenses.txt"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ios-review-licenses-6833313915
+  cancel-in-progress: false
+jobs:
+  attachment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install "PyJWT[crypto]==2.10.1"
+      - name: Check attachment safeguards
+        run: python scripts/test_app_store_review.py
+      - name: Attach licenses to iOS 1.0 (4) and verify processing
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+        run: python scripts/app_store_review.py --upload-licenses
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ios-review-status
+          path: review-status.json
+          if-no-files-found: ignore
+          retention-days: 7
