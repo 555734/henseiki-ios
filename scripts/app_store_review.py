@@ -55,7 +55,15 @@ class Client:
         if not url.startswith(API + "/v1/"):
             raise ReviewError("Refusing a non-App-Store-Connect API destination.")
         payload = None if data is None else json.dumps(data).encode()
-        raw = request(self.opener, urllib.request.Request(url, data=payload, headers=self.headers, method=method))
+        for attempt in range(4):
+            try:
+                raw = request(self.opener, urllib.request.Request(url, data=payload, headers=self.headers, method=method))
+                break
+            except ReviewError as error:
+                transient = str(error).startswith(("HTTP 500;", "HTTP 502;", "HTTP 503;", "HTTP 504;", "HTTP 429;"))
+                if method != "GET" or not transient or attempt == 3:
+                    raise
+                time.sleep(2 ** attempt)
         return json.loads(raw) if raw else {}
 
     def list(self, path):
@@ -83,10 +91,12 @@ class Client:
         request(self.opener, urllib.request.Request(operation["url"], data=chunk, headers=headers, method="PUT"))
 
 def target(client):
+    print("Stage: verify app identity", flush=True)
     app = client.api("GET", f"/v1/apps/{APP_ID}")["data"]
     if app["attributes"]["bundleId"] != BUNDLE_ID:
         raise ReviewError("App identity mismatch.")
     query = urllib.parse.urlencode({"filter[platform]": "IOS", "filter[versionString]": VERSION})
+    print("Stage: read version 1.0", flush=True)
     versions = client.list(f"/v1/apps/{APP_ID}/appStoreVersions?{query}")
     if len(versions) != 1:
         raise ReviewError("Expected exactly one iOS 1.0 version.")
@@ -94,9 +104,11 @@ def target(client):
     state = version["attributes"]["appStoreState"]
     if state not in {"REJECTED", "METADATA_REJECTED", "DEVELOPER_REJECTED", "PREPARE_FOR_SUBMISSION"}:
         raise ReviewError("Version is no longer in an editable rejected/preparation state.")
+    print("Stage: verify selected build 4", flush=True)
     build = client.api("GET", f'/v1/appStoreVersions/{version["id"]}/build')["data"]
     if not build or build["attributes"]["version"] != BUILD:
         raise ReviewError("Selected build is no longer 4; refusing changes.")
+    print("Stage: read saved review notes", flush=True)
     detail = client.api("GET", f'/v1/appStoreVersions/{version["id"]}/appStoreReviewDetail')["data"]
     notes = detail["attributes"].get("notes") or ""
     return detail["id"], {
@@ -116,6 +128,7 @@ def wait_complete(client, attachment_id):
     raise ReviewError("Attachment processing is still pending after 120 seconds.")
 
 def attach(client, review_id, content):
+    print("Stage: check existing license attachments", flush=True)
     digest = hashlib.md5(content, usedforsecurity=False).hexdigest()
     existing = [a for a in client.list(f"/v1/appStoreReviewDetails/{review_id}/appStoreReviewAttachments?limit=50")
                 if a["attributes"].get("fileName") == NAME]
@@ -125,20 +138,24 @@ def attach(client, review_id, content):
         item = wait_complete(client, existing[0]["id"])
         return {"file_name": NAME, "state": item["attributes"]["assetDeliveryState"]["state"],
                 "reused": True, "sha256": hashlib.sha256(content).hexdigest()}
+    print("Stage: reserve license attachment", flush=True)
     item = client.api("POST", "/v1/appStoreReviewAttachments", {
         "data": {"type": "appStoreReviewAttachments", "attributes": {"fileName": NAME, "fileSize": len(content)},
                  "relationships": {"appStoreReviewDetail": {
                      "data": {"type": "appStoreReviewDetails", "id": review_id}}}}})["data"]
     operations = sorted(item["attributes"]["uploadOperations"], key=lambda x: x["offset"])
     offset = 0
+    print("Stage: validate upload ranges", flush=True)
     for operation in operations:
         if operation["offset"] != offset or operation["length"] <= 0:
             raise ReviewError("Upload ranges are not contiguous.")
         offset += operation["length"]
     if offset != len(content):
         raise ReviewError("Upload ranges do not cover the file exactly.")
+    print("Stage: upload license bytes", flush=True)
     for operation in operations:
         client.upload(operation, content)
+    print("Stage: commit license upload", flush=True)
     client.api("PATCH", f'/v1/appStoreReviewAttachments/{item["id"]}', {
         "data": {"type": "appStoreReviewAttachments", "id": item["id"],
                  "attributes": {"uploaded": True, "sourceFileChecksum": digest}}})
