@@ -42,6 +42,29 @@ class FakeClient:
         self.chunks.append(content[operation["offset"]:operation["offset"] + operation["length"]])
 
 class Guards(unittest.TestCase):
+    def test_license_link_preserves_notes_and_is_idempotent(self):
+        original = "1. PENDING physical video\n6. See " + review.NAME
+        class Notes:
+            notes, writes = original, 0
+            def api(self, method, path, data=None):
+                if method == "PATCH":
+                    self.notes = data["data"]["attributes"]["notes"]
+                    self.writes += 1
+                return {"data": {"attributes": {"notes": self.notes}}}
+        client = Notes()
+        expected = hashlib.sha256(original.encode()).hexdigest()
+        with patch.object(review, "EXPECTED_DRAFT_SHA256", expected):
+            result = review.link_licenses(client, "r")
+            self.assertTrue(result["readback_matches"])
+            self.assertIn("PENDING physical video", client.notes)
+            self.assertEqual(client.writes, 1)
+            self.assertTrue(review.link_licenses(client, "r")["reused"])
+            self.assertEqual(client.writes, 1)
+            client.notes = original + "\nNew user edit"
+            with self.assertRaises(review.ReviewError):
+                review.link_licenses(client, "r")
+            self.assertEqual(client.writes, 1)
+
     def test_scope_rejects_another_app_build_or_review_state(self):
         for attribute, value in [("bundle", "other.app"), ("build", "5"), ("state", "WAITING_FOR_REVIEW")]:
             client = FakeClient()
